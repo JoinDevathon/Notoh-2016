@@ -1,4 +1,4 @@
-package org.devathon.contest2016.util;
+package org.devathon.contest2016;
 
 import org.bukkit.ChatColor;
 
