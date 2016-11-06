@@ -41,7 +41,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class DevathonPlugin extends JavaPlugin implements Listener {
-
 	
 	private ArrayList<Player> players;
 	private ArrayList<OfflinePlayer> ops;
@@ -84,8 +83,9 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     	if(cmd.getName().equalsIgnoreCase("notohbot")) { //base command
     		if(args.length == 0) {
     			pla.sendMessage(DevathonUtil.devathonprefix + "You must specify arguments! Do /notohbot help for commands!");
+    			return true;
     		}
-    		if(args[0].equalsIgnoreCase("help")) {
+    		if(args[0].equalsIgnoreCase("help") && args.length == 1) {
     			/*
     			 * INDEX OF COMMANDS HERE
     			 * help: generates all commands
@@ -106,22 +106,22 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     			 * 
     			 */
     			pla.sendMessage(DevathonUtil.devathonprefix + "List of Notohbot Commands: ");
-    			pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot helpop <message> - Message's all staff members.");
+    			pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot helpop <message> - Messages all staff members.");
     			pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot help - Generates this message."); 
-    			pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot getlocation - Get's your location.");
+    			pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot getlocation - Gets your location.");
     			pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot getstaff - Gets all the staff and tells the player.");
-				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot pickupline - Tells you a pickupline.");
-				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot selfhelp - Gives you a selfhelp book.");
+				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot pickupline - Tells you a pick-up line.");
+				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot selfhelp - Gives you a self help book.");
 				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot teachmetoprogram - Teaches you how to program.");
 				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot fanfiction - Gives you fanfiction");
     			if(pla.hasPermission("notohbot.mod")) {
     				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot kick <player> - Kicks a player.");
-    				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot ban <player> - Bans a playe.r");
+    				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot ban <player> - Bans a player.");
     				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot getplayers - Gets all the players on the server.");
     				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot heal - Heals you.");
     				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot heal <player> - Heals a certain player.");
-       				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot getip <player> - Get's a player's ip.");
-    				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot getlocation <player> - Gets the location of a specified player.");
+       				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot getip <player> - Get's a player's IP.");
+    		//		pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot getlocation <player> - Gets the location of a specified player.");
     				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot testcom - Test command.");
     				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot fireball - Launches a fireball!");
     			}
@@ -129,8 +129,8 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot getops - Gets all the ops.");
     				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot kick <player> - Kicks a player.");
     				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot freezeall - Freezes all players on the server.");
-    				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot sethealthannounce - Toggles health announce on or off.");
-    				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot banplayersip <player> - Ban's a players ip.");
+    				pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot sethealthannounce <TRUE, FALSE, DEALT> - Toggles health announce on or off.");
+    			//	pla.sendMessage(DevathonUtil.devathonprefix + "/notohbot banplayersip <player> - Bans a players IP.");
     			}
     				
     		}
@@ -147,22 +147,23 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     			Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"ban " + target.getName());
     			pla.sendMessage(DevathonUtil.devathonprefix + target + " has been banned by NotohBot.");
     		}
-    		if(args[0].equalsIgnoreCase("teachmetoprogram")) {
+    		if(args[0].equalsIgnoreCase("teachmetoprogram") && args.length == 1) {
     			ItemStack item = new ItemStack(Material.WRITTEN_BOOK, 1);
     			BookMeta meta = (BookMeta) item.getItemMeta();
-    			meta.setAuthor("Alan  Turing");
+    			meta.setAuthor("Alan Turing");
     			meta.setTitle("How to Code");
     			
     			meta.setPages(Arrays.asList("So you want to learn to program, and here's how.",
     					"Step 1: Install Microsoft Word. Microsoft Word is the only true coding program, and it will make you a better programmer.",
     					"Step 2: Type random gibberish as all coding is gibberish. Because of this all good computer programs are only successful if the dev is lucky",
     					"And you might be wondering then how was the computer invented, and the secret is, Alan Turing, Inventor of the Computer was very high when he made his discovery.",
-    					"Step 3: Get lucky. If you accidently type the right thing, rich and famous ez. The End"));
+    					"Step 3: Get lucky. If you accidently type the right thing, rich and famous ez. The End."));
     			
     			item.setItemMeta(meta);
     			pla.getInventory().addItem(item);
+    			pla.sendMessage(DevathonUtil.devathonprefix + "You received How to Code. ");
     		}
-    		if(args[0].equalsIgnoreCase("fanfiction")) {
+    		if(args[0].equalsIgnoreCase("fanfiction") && args.length == 1) {
     			ItemStack item = new ItemStack(Material.WRITTEN_BOOK, 1);
     			BookMeta meta = (BookMeta) item.getItemMeta();
     			meta.setAuthor("LE SEMAJ");
@@ -182,30 +183,33 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     			
     			item.setItemMeta(meta);
     			pla.getInventory().addItem(item);
+    			pla.sendMessage(DevathonUtil.devathonprefix + "You received 50 Shades of Blocks!");
     		}
-    		if(args[0].equalsIgnoreCase("getplayers") && pla.hasPermission("notohbot.mod")) {
+    		if(args[0].equalsIgnoreCase("getplayers") && pla.hasPermission("notohbot.mod") && args.length == 1) {
     			for(Player p : getPlayers()) {
     				pla.sendMessage(DevathonUtil.devathonprefix + "" + p.getName());
     			}
     		}
-    		if(args[0].equalsIgnoreCase("getops") && pla.hasPermission("notohbot.op")) {
+    		if(args[0].equalsIgnoreCase("getops") && pla.hasPermission("notohbot.op") && args.length == 1) {
     			for(OfflinePlayer p : getOps()) {
     				pla.sendMessage(DevathonUtil.devathonprefix + "" + p.getName());
     			}
     		}
-    		if(args[0].equalsIgnoreCase("getstaff")) {
+    		if(args[0].equalsIgnoreCase("getstaff") && args.length == 1) {
     			for(OfflinePlayer p : getOps()) {
     				pla.sendMessage(DevathonUtil.devathonprefix + "" + p.getName());
     			}
     		}
-    		if(args[0].equalsIgnoreCase("freezeall") && pla.hasPermission("notohbot.op")) {
+    		if(args[0].equalsIgnoreCase("freezeall") && pla.hasPermission("notohbot.op") && args.length == 1) {
     			if(FreezeAll == false) {
     				FreezeAll = true;
-        			pla.sendMessage("You froze all players!");
+        			Bukkit.broadcastMessage(DevathonUtil.devathonprefix + "An operator has frozen all non-immune players!");
+        			return true;
     			}
     			if(FreezeAll == true) {
     				FreezeAll = false;
-    				pla.sendMessage(DevathonUtil.devathonprefix + "You unfroze all players!");
+        			Bukkit.broadcastMessage(DevathonUtil.devathonprefix + "An operator has unfrozen all players!");
+    				return true;
     			}
     		}
     		if(args[0].equalsIgnoreCase("helpop")) {
@@ -255,12 +259,12 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     				}
     			}
     		}
-    		if(args[0].equalsIgnoreCase("getlocation")) {
-    			if(args.length == 0) {
-    			pla.sendMessage(DevathonUtil.devathonprefix + "You are at " + "world: " + pla.getWorld() + ", x: " + pla.getLocation().getX() + ", y: " + pla.getLocation().getY() + ", z: " + pla.getLocation().getZ());
+    		if(args[0].equalsIgnoreCase("getlocation") && args.length == 1) {
+    			if(args.length == 1) {
+    			pla.sendMessage(DevathonUtil.devathonprefix + "You are at " + "world: " + pla.getWorld().getName() + ", x: " + pla.getLocation().getX() + ", y: " + pla.getLocation().getY() + ", z: " + pla.getLocation().getZ());
     		}
-    			if(args.length == 1 && pla.hasPermission("notohbot.mod")) {
-    				Player target = Bukkit.getPlayerExact(args[0]);
+    		if(args.length == 2 && pla.hasPermission("notohbot.mod")) {
+    				Player target = Bukkit.getPlayerExact(args[1]);
     				pla.sendMessage(DevathonUtil.devathonprefix + target + " is at x: " + target.getWorld() + ", x: " + pla.getLocation().getX() + ", y: " + pla.getLocation().getY() + ", z: " + pla.getLocation().getZ());
     			}
     		}
@@ -281,14 +285,14 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     		if(args[0].equalsIgnoreCase("heal") && pla.hasPermission("notohbot.mod")) {
     			if(args.length == 1) {
     				pla.setHealth(pla.getMaxHealth());
+    				pla.sendMessage(DevathonUtil.devathonprefix + "You were healed.");
     			}
-    			if(args.length == 3) {
+    			if(args.length == 2) {
     				Player target = Bukkit.getPlayerExact(args[1]);
-    				
     				target.setHealth(target.getMaxHealth());
     			}
     		}
-    		if(args[0].equalsIgnoreCase("pickupline")) {
+    		if(args[0].equalsIgnoreCase("pickupline") && args.length == 1) {
     			if(args.length > 1) {
     				pla.sendMessage(DevathonUtil.devathonprefix + "Too many args!");
     				return false;
@@ -303,7 +307,7 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     					"WebMD says your love is contagious. ",
     					"Isn't your e-mail address beautifulgirl@mydreams.com? ",
     					"Your eyes are as blue as the sea I dumped my ex’s body in.﻿",
-    					"I heard you’re good in algebra, can you replace my X without asking Y",
+    					"I heard you’re good in algebra, can you replace my X without asking Y.",
     					"My mom thinks I`m gay, can you help me prove her wrong?",
     					"I’m no organ donor but I’d be happy to give you my heart.",
     					"You look familiar, didn’t we take a class together? I could’ve sworn we had chemistry.",
@@ -313,14 +317,17 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     					"I wish you were a Pony Carousel outside Walmart, so I could ride you all day long for a quarter. ",
     					"Is your father a thief? Because he stole the sparkle from the stars, and put it in your eyes. ",
     					"Can I see that label? I just wanted to know if you were made in heaven. ",
-    					"I think you're the most beautiful girl I've seen - on a Wednesday",
+    					"I think you're the most beautiful girl I've seen - on a Wednesday.",
     					"You remind me of an ice cold Pepsi - I've just gotta have it. ",
     					"Can I have your picture so I can show Santa what I want for Christmas?",
-    					"Is your dad an art thief? Because you're a masterpiece."
-    					
-    			};
+    					"Is your dad an art thief? Because you're a masterpiece.",
+    					"It's a good thing you're not corn. Why? Because you're hot. You'd be popping all over!",
+    					"You are the JDK in my life, I won't compile without you.",
+    					"You initialize me, without you, my life would return null.",
+    					"My love for you is a for loop without an increment operator, infinite, never terminating.",
+    					"Hey, My name's MICROSOFT_COMPUTER_SERVICE_SKYPE, but, you can call me anytime eyyy (I speak indian)"};
     			
-    		int pickupNum = r.nextInt(0) + 1;
+    		int pickupNum = r.nextInt(1) + 1;
     		
     		for(int i = 0; i < pickupNum; i++) {
     				String line = pickuplines[r.nextInt(pickuplines.length)];
@@ -328,11 +335,11 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     				pla.sendMessage(DevathonUtil.devathonprefix + line);
     				}
     		}
-    		if(args[0].equalsIgnoreCase("selfhelp")) {
+    		if(args[0].equalsIgnoreCase("selfhelp") && args.length == 1) {
     			ItemStack item = new ItemStack(Material.WRITTEN_BOOK, 1);
     			BookMeta meta = (BookMeta) item.getItemMeta();
     			meta.setAuthor("Some dev in his basement");
-    			meta.setTitle("Self help for dummies.");
+    			meta.setTitle("Self Help for Dummies");
     			
     			meta.setPages(Arrays.asList("So you are reading this because you need help. YOU ARE READING A SELF HELP BOOK ON A LEGO GAME MADE BY SOME DEV IN HIS BASEMENT! You need help man.",
     					"But I will help you improve your life, step 1: Get 43 cats. 43 specifically. They will make you happy and successful. ",
@@ -341,8 +348,9 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     			
     			item.setItemMeta(meta);
     			pla.getInventory().addItem(item);
+    			pla.sendMessage(DevathonUtil.devathonprefix + "You received Self Help for Dummies");
     		}
-    		if(args[0].equalsIgnoreCase("getip") && pla.hasPermission("notohbot.mod")) {
+    		if(args[0].equalsIgnoreCase("getip") && pla.hasPermission("notohbot.mod") && args.length == 2) {
     			if(args.length == 1) {
     				pla.sendMessage(DevathonUtil.devathonprefix + "You must specify a player!");
     				return true;
@@ -354,22 +362,26 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     				pla.sendMessage(DevathonUtil.devathonprefix + ip.toString());
     			}
     		}
-    		if(args[0].equalsIgnoreCase("banplayersip") && pla.hasPermission("notohbot.op")) {
+   /* 		if(args[0].equalsIgnoreCase("banplayersip") && pla.hasPermission("notohbot.op")) {
     			if(args.length == 1) {
     				pla.sendMessage(DevathonUtil.devathonprefix + "You must specify a player!");
     			} else if (args.length > 2) {
     				pla.sendMessage(DevathonUtil.devathonprefix + "Too many args!");
-    			} else {
-    				Player target = Bukkit.getPlayerExact(args[1]);
+  commented out  			} else {
+  for deprecation  				Player target = Bukkit.getPlayerExact(args[1]);
     				InetSocketAddress ip = target.getAddress();
-    				Bukkit.banIP(ip.toString());
+    				String ipstring = ip.toString();
+    				ipstring.replace("/", "");
+    				Bukkit.banIP(ipstring);
+    				Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"ban-ip " + target.getAddress());
     				pla.sendMessage(DevathonUtil.devathonprefix + "Banned IP " + ip.toString());
     			}
-    		}
-    		if(args[0].equalsIgnoreCase("fireball") && pla.hasPermission("notohbot.mod")) {
+   	} */
+    		if(args[0].equalsIgnoreCase("fireball") && pla.hasPermission("notohbot.mod") && args.length == 1) {
     			pla.launchProjectile(Fireball.class);
+    			pla.sendMessage(DevathonUtil.devathonprefix + "FIREEEEEEEEEEEEEEEEEEEEEEEEBAALLLLLLLLL");
     		}
-    		if(args[0].equalsIgnoreCase("TESTCOM") && sender.hasPermission("notohbot.mod")) {
+    		if(args[0].equalsIgnoreCase("TESTCOM") && sender.hasPermission("notohbot.mod") && args.length == 1) {
     		sender.sendMessage(DevathonUtil.devathonprefix + "Yo, this works! WHAT DO YOU KNOW?!");
     		}
     	}
@@ -424,7 +436,7 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     	if(pla.hasPermission("notohbot.op")) {
     		ops.add(pla);
     	}
-    	if(pla.hasPermission("notohbot.op") || pla.hasPermission("notohbot.mod") || pla.hasPermission("notohbot.helper")) {
+    	if(pla.hasPermission("notohbot.op") || pla.hasPermission("notohbot.mod") || pla.hasPermission("notohbot.helper") && !staff.contains(pla)) {
     		staff.add(pla);
     	}
     }
@@ -468,3 +480,4 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     
     
 }
+
