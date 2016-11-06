@@ -1,4 +1,4 @@
-package org.devathon.contest2016.main;
+package org.devathon.contest2016;
 
 /*
 Copyright (c) 2016 TheyCallMeNotoh
@@ -39,7 +39,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.devathon.contest2016.util.DevathonUtil;
 
 public final class DevathonPlugin extends JavaPlugin implements Listener {
 
@@ -469,4 +468,3 @@ public final class DevathonPlugin extends JavaPlugin implements Listener {
     
     
 }
-
