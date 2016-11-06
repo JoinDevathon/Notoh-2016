@@ -1,0 +1,31 @@
+name: Notohbot
+description: A project for the Devathon contest
+version: 1.0.0
+author: TheyCallMeNotoh
+website: devathon.org
+main: org.devathon.contest2016.DevathonPlugin
+
+commands:
+    notohbot:
+        usage: /<command> [args]
+        description: NotohBot Commands.
+        aliases: [nb, notoh]
+permissions:
+    notohbot.op:
+        description: op permission
+        default: op
+        children:
+            notohbot.mod: true
+    notohbot.mod:
+        description: mod permission
+        default: op
+        children:
+            notohbot.helper: true
+    notohbot.helper:
+        description: A kind of useless permission XD
+        default: op
+        children:
+            notohbot.antifreeze: true
+    notohbot.antifreeze:
+        description: Prevents freezing.
+        default: op
